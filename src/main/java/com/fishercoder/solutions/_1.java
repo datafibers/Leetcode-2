@@ -1,5 +1,6 @@
 package com.fishercoder.solutions;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -27,6 +28,29 @@ public class _1 {
             }
             return new int[]{-1, -1};
         }
+    }
+
+    public static class Solution2 {
+        public int[] twoSum(int[] nums, int target) {
+            Map<Integer, Integer> hm = new HashMap<>();
+            int len = nums.length;
+            for (int i = 0; i < len; i++) {
+                int diff = target - nums[i];
+                if (hm.containsKey(diff)) {
+                    return new int[]{hm.get(diff), i};
+                } else {
+                    hm.put(nums[i], i);
+                }
+            }
+            return new int[]{-1, -1};
+        }
+    }
+
+    public static void main(String[] args) {
+        int[] array = new int[] {2, 7, 11, 16};
+        int target = 9;
+        System.out.println(Arrays.toString(new Solution1().twoSum(array, target)));
+        System.out.println(Arrays.toString(new Solution2().twoSum(array, target)));
     }
 
 }
