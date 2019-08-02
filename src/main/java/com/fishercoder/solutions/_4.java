@@ -35,36 +35,35 @@ public class _4 {
         public double findMedianSortedArrays(int[] A, int[] B) {
             int m = A.length;
             int n = B.length;
-            int l = (m + n + 1) / 2;
-            int r = (m + n + 2) / 2;
+            int l = (m + n + 1) / 2; //left half of the combined median
+            int r = (m + n + 2) / 2; //right half of the combined median
+            // If the nums1.length + nums2.length is odd, the 2 function will return the same number
+            // Else if nums1.length + nums2.length is even, the 2 function will return the left number and right number that make up a median
             return (getkth(A, 0, B, 0, l) + getkth(A, 0, B, 0, r)) / 2.0;
         }
 
         public double getkth(int[] A, int aStart, int[] B, int bStart, int k) {
-            if (aStart > A.length - 1) {
-                return B[bStart + k - 1];
-            }
-            if (bStart > B.length - 1) {
-                return A[aStart + k - 1];
-            }
-            if (k == 1) {
-                return Math.min(A[aStart], B[bStart]);
-            }
+            // This function finds the Kth element in nums1 + nums2
+
+            // If nums1 is exhausted, return kth number in nums2
+            if (aStart > A.length - 1) return B[bStart + k - 1];
+
+            // If nums2 is exhausted, return kth number in nums1
+            if (bStart > B.length - 1) return A[aStart + k - 1];
+
+            // If k == 1, return the first number
+            // Since nums1 and nums2 is sorted, the smaller one among the start point of nums1 and nums2 is the first one
+            if (k == 1) return Math.min(A[aStart], B[bStart]);
 
             int aMid = Integer.MAX_VALUE;
             int bMid = Integer.MAX_VALUE;
-            if (aStart + k / 2 - 1 < A.length) {
-                aMid = A[aStart + k / 2 - 1];
-            }
-            if (bStart + k / 2 - 1 < B.length) {
-                bMid = B[bStart + k / 2 - 1];
-            }
+            if (aStart + k / 2 - 1 < A.length) aMid = A[aStart + k / 2 - 1];
+            if (bStart + k / 2 - 1 < B.length) bMid = B[bStart + k / 2 - 1];
 
-            if (aMid < bMid) {
-                return getkth(A, aStart + k / 2, B, bStart, k - k / 2);// Check: aRight + bLeft
-            } else {
-                return getkth(A, aStart, B, bStart + k / 2, k - k / 2);// Check: bRight + aLeft
-            }
+            // Throw away half of the array from nums1 or nums2. And cut k in half
+            return (aMid < bMid) ?
+                getkth(A, aStart + k / 2, B, bStart, k - k / 2):// Check: aRight + bLeft
+                getkth(A, aStart, B, bStart + k / 2, k - k / 2);// Check: bRight + aLeft
         }
     }
 
