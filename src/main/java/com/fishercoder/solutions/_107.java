@@ -28,6 +28,7 @@ return its bottom-up level order traversal as:
   [9,20],
   [3]
 ]
+It can use 102's solution and do Collection.reverse;
 */
 
 public class _107 {
