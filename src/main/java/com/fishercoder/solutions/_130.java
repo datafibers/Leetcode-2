@@ -29,7 +29,7 @@ public class _130 {
 
         /**
          * I won't call this problem hard, it's just confusing, you'll definitely want to clarify what
-         * the problem means before coding. This problem eactually means: any grid that is 'O' but on
+         * the problem means before coding. This problem actually means: any grid that is 'O' but on
          * the four edges, will never be marked to 'X'; furthermore, any grid that is 'O' and that is
          * connected with the above type of 'O' will never be marked to 'X' as well; only all other
          * nodes that has any one direct neighbor that is an 'X' will be marked to 'X'.
