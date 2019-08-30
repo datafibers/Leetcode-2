@@ -113,4 +113,30 @@ public class _128 {
       return max;
     }
   }
+
+  public static class Solution3 {
+    public int longestConsecutive(int[] nums) {
+      HashSet<Integer> set = new HashSet<>();
+      for (int i = 0; i < nums.length; i++) {
+        set.add(nums[i]);
+      }
+      int max = 0;
+      for (int i = 0; i < nums.length; i++) {
+        int num = nums[i];
+            /*
+            我们只考虑从序列最小的数开始即可。
+            实现的话，当考虑 n 的时候，我们先看一看 n - 1 是否存在，如果不存在，那么从 n 开始就是我们需要考虑的序列了。
+            否则的话，直接跳过。*/
+        if (!set.contains(num - 1)) {
+          int count = 0;
+          while (set.contains(num)) {
+            count++;
+            num += 1;
+          }
+          max = Math.max(max, count);
+        }
+      }
+      return max;
+    }
+  }
 }
